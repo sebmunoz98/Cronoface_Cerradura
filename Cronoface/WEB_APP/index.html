@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel de Control - CronoSafe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dark-mode">
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="logo">⚡ CronoSafe </div>
+        <nav class="tabs">
+          <button class="tab active">Control Maestro</button>
+        </nav>
+      </div>
+      <div class="topbar-right">
+        <span id="broker-info" class="broker-info">Broker: **Sin Conexión**</span>
+        <span id="connection-indicator" class="badge badge-offline">Offline</span>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="cards">
+        <article class="card status-card large-card">
+          <h2>🛡️ **Estado de Seguridad**</h2>
+          <div class="card-body status-body">
+            <div id="system-status-icon" class="status-indicator icon-offline">🚨</div>
+            <div class="status-text">
+              <h1 id="system-status-label" class="status-critical">**PUERTA CERRADA**</h1>
+              <p id="system-status-detail">Sistema listo. Conexión Estable.</p>
+            </div>
+          </div>
+          <div class="card-footer data-grid">
+            <div>
+              <label>IP del dispositivo:</label>
+              <p id="device-ip">192.168.1.29</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card control-card">
+          <h2>🔑 Control de Acceso</h2>
+          <div class="card-body control-body">
+            <button id="btn-open" class="btn btn-action btn-open">
+              <span class="btn-icon">🔓</span>
+              ACTIVAR APERTURA
+            </button>
+            <button id="btn-close" class="btn btn-action btn-close">
+              <span class="btn-icon">🔒</span>
+              ASEGURAR CIERRE
+            </button>
+          </div>
+        </article>
+        
+        <article class="card video-card">
+          <h2>📸 Video en Vivo</h2>
+          <div class="card-body video-feed-container">
+            <img id="camera-stream" 
+                 src="http://192.168.1.29:81/stream" 
+                 alt="Feed de la cámara en vivo" 
+                 onerror="document.getElementById('camera-status').textContent='Error de conexión: Video offline';" />
+            <div id="camera-status" class="camera-status">Cargando stream...</div>
+            <button id="btn-refresh-stream" class="btn-refresh-stream" title="Refrescar Video">🔄</button>
+          </div>
+        </article>
+        
+        <article class="card face-card">
+          <h2>👁️ Face ID / Backups</h2>
+          <div class="card-body face-body">
+            <div class="face-status-row">
+              <span id="faceid-dot" class="dot dot-active"></span>
+              <span id="faceid-status-label">Face ID: **ACTIVO**</span>
+            </div>
+            <div class="switch-row">
+              <span>Habilitar/Deshabilitar Face ID</span>
+              <label class="switch">
+                <input type="checkbox" id="toggle-faceid" checked />
+                <span class="slider round"></span>
+              </label>
+            </div>
+
+            <hr />
+
+            <h3>Métodos de Respaldo</h3>
+            <ul class="backup-list">
+              <li>
+                <span id="last-access-dot" class="dot dot-inactive"></span>
+                <span id="last-access">Último Acceso Válido: **N/A**</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <section class="log-panel">
+        <h2>📜 Registro de Eventos (LOG)</h2>
+        <div id="log-output" class="log-output">
+          <p class="log-entry log-system">[09:30:00] Sistema iniciado. Esperando conexión...</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>CronoSafe - Panel de Control Web · Proyecto ESP32-CAM</span>
+    </footer>
+  </div>
+
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
