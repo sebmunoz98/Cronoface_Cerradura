@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/sebmunoz98/Cronoface_Cerradura.git'
+            }
+        }
+
+        stage('Instalar PlatformIO') {
+            steps {
+                bat "pip install -U platformio"
+            }
+        }
+
+        stage('Compilar ESP32') {
+            steps {
+                bat "pio run"
+            }
+        }
+
+        stage('Guardar artefactos') {
+            steps {
+                archiveArtifacts artifacts: '.pio/build/**', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo "❌ La compilación falló"
+        }
+        success {
+            echo "🎉 Compilación exitosa"
+        }
+    }
+}
