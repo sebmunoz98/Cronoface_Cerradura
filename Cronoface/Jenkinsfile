@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout') {
             steps {
                 git branch: 'main',
@@ -11,29 +12,23 @@ pipeline {
 
         stage('Instalar PlatformIO') {
             steps {
-                bat "pip install -U platformio"
+                bat 'pip install platformio'
+            }
+        }
+
+        stage('Verificar PlatformIO') {
+            steps {
+                bat 'pio --version'
             }
         }
 
         stage('Compilar ESP32') {
             steps {
-                bat "pio run"
-            }
-        }
-
-        stage('Guardar artefactos') {
-            steps {
-                archiveArtifacts artifacts: '.pio/build/**', fingerprint: true
+                dir('Cronoface') {
+                    bat 'pio run'
+                }
             }
         }
     }
-
-    post {
-        failure {
-            echo "❌ La compilación falló"
-        }
-        success {
-            echo "🎉 Compilación exitosa"
-        }
-    }
+}
 }
