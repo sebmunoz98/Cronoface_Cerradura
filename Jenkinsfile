@@ -1,4 +1,4 @@
-  pipeline {
+pipeline {
     agent any
 
     stages {
@@ -12,17 +12,21 @@
 
         stage('Instalar PlatformIO') {
             steps {
-                bat """
-                pip install platformio
-                """
+                bat 'pip install platformio'
             }
         }
 
-        stage('Compilar ESP32 con PlatformIO') {
+        stage('Verificar PlatformIO') {
             steps {
-                bat """
-                pio run
-                """
+                bat 'pio --version'
+            }
+        }
+
+        stage('Compilar ESP32') {
+            steps {
+                dir('Cronoface') {
+                    bat 'pio run'
+                }
             }
         }
     }
