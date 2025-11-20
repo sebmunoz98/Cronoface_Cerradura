@@ -1,2 +1,135 @@
 # Cronoface_Cerradura
 El proyecto que estamos desarrollando es un Firmware de Cerradura Inteligente (Smart Lock) altamente modularizado, diseñado para ejecutarse en una placa ESP32-CAM.  Su objetivo principal es controlar el acceso a una puerta mediante múltiples métodos de autenticación y permitir la gestión remota a través de internet (IoT).
+ACTIVIDAD 3
+
+
+
+
+
+
+
+
+
+ESTUDIANTES
+ANDREA STHEFANNIA MUÑOZ ORDOÑEZ
+SEBASTIAN ALEJANDRO MUÑOZ HERRERA
+BRAYAN ESTIVEN VARGAS JAMAUCA
+ANDRES FELIPE BETANCOURTH BARRAGAN
+
+
+
+
+
+
+
+UNIVERSIDAD REMINGTON
+INGENIERIA DE SISTEMAS
+INGENIERIA DE SOFTWARE 2
+
+
+
+
+
+
+
+DOCENTE
+DANIEL ARTEAGA FAJARDO 
+INGENIERO DE SISTEMAS
+
+
+
+
+
+
+
+
+SAN JUAN DE PASTO
+2025
+
+ACTIVIDAD PRACTICA 
+  
+1.	Flujo en GitHub
+ 
+2.	Repositorio
+
+
+
+    https://github.com/sebmunoz98/Cronoface_Cerradura.git
+
+3.	Creación de pipeline en Jenkins
+
+1. Crear un archivo Jenkinsfile en el Proyecto
+El `Jenkinsfile` define las etapas del pipeline.
+
+2. Subir el Jenkinsfile al repositorio
+Colocar el archivo en la raíz del repositorio y súbirlo con un commit.
+
+3. Seleccionar la opción "Pipeline script from SCM".
+4. Elegir el sistema de control de versiones
+5. Introducir la URL del repositorio y la rama principal que usará el pipeline 
+6. Guardar y ejecutar el pipeline.
+ 
+ 
+http://localhost:8080/job/pipeline-esp32-cronoface/
+
+4.	Automatizar el despliegue con Docker Compose
+
+Tener instalado Docker y Docker Compose en el servidor o entorno local ([Guía de instalación oficial](https://docs.docker.com/compose/install/)).
+- Acceso al código fuente del proyecto y al archivo `docker-compose.yml` en la raíz del proyecto.
+
+Estructura de Archivos
+docker-compose.yml
+
+Este archivo define los servicios, redes y volúmenes necesarios para la aplicación
+
+Proceso de Automatización
+
+1. Clonar el repositorio
+
+Si está en GitHub o Gitea:
+ sh
+git clone <URL-del-repo>
+cd Cronoface_Cerradura
+
+
+2. Configurar variables de entorno
+
+Colocar variables necesarias en un archivo `.env` si así lo requiere el `docker-compose.yml`.
+
+3. Construir y desplegar los servicios
+
+Ejecutar el siguiente comando para construir las imágenes y ejecutar los servicios en segundo plano:
+sh
+docker compose up -d --build
+
+
+4. Verificar el estado de los servicios
+
+Comprobar que los contenedores estén corriendo correctamente:
+sh
+docker compose ps
+
+
+
+
+
+
+    5. Detener los servicios
+
+Cuando desees detener todo el entorno:
+sh
+docker compose down
+
+Integración con CI/CD
+
+Para integrar este proceso en Jenkins u otra herramienta de CI/CD, basta con asegurarse de que el agente/jobincluso tenga Docker y Docker Compose instalado, y ejecutar los comandos listados anteriormente dentro del pipeline correspondiente.
+
+5.	
+            
+
+
+
+
+
+
+
